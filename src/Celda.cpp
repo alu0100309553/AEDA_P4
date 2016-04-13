@@ -23,12 +23,13 @@ Celda<T>::Celda (int M): pVector(){
 }
 
 template <class T>
-bool Celda<T>::buscar (T h){
+bool Celda<T>::buscar (T &h){
 	bool encontrado = false;
-	for (int i = 0 ; i < pVector->size() ; i++){
+	for (int i = 0 ; i < tamCelda ; i++){
 		if (pVector[i] == h){
 			encontrado = true;
 		}
+
 	}
 	return encontrado;
 }

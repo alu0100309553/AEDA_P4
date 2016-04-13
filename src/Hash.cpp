@@ -15,7 +15,10 @@ template <class T>
 Hash<T>::Hash():
 pFD(),
 pFE(),
-pCeldas()
+pCeldas(),
+contador(0),
+numPos(10),
+numCeldas(10)
 {
 	pFD = FuncDist<T>(10);
 	pFE = FuncExpl<T>(pFD);
@@ -28,10 +31,13 @@ template <class T>
 Hash<T>::Hash(int N, int M):
 pFD(),
 pFE(),
-pCeldas()
+pCeldas(),
+contador(0),
+numPos(N),
+numCeldas(M)
 {
-	pFD = new FuncDist<T>(N);
-	pFE = new FuncExpl<T>(pFD);
+	pFD = new FDMod<T>(N);
+	pFE = new FuncExpl<T>(pFD, N);
 	Celda<T>::tamCelda = M;
 	pCeldas = new Celda<T>[N];
 
@@ -42,26 +48,46 @@ bool Hash<T>::insertar( T &k){
 	bool insertado = false;
 	int intento = 0;
 	int pos = pFD->h(k);
-	while (!insertado && !pCeldas[pos].llena()){
-		insertado = pCeldas[pos].insertar(k);
-		if (!insertado){
-			pos = pFE->g(k,intento);
-			intento++;
+	if(!buscar(k) && !llena()){
+		while (!insertado && !pCeldas[pos].llena()){
+			insertado = pCeldas[pos].insertar(k);
+			if (!insertado){
+				pos = pFE->g(k,intento);
+				intento++;
+			}
 		}
+		if (insertado){
+			contador++;
+		}
+	}
+	else if(!llena()){
+		insertado = true;   //porque ya existia en la tabla, no se inserta de nuevo
+	}else{
+		insertado = false;
 	}
 	return insertado;
 }
 
 template <class T>
-bool Hash<T>::buscar(const T &k){
+bool Hash<T>::buscar(T &k){
 	bool encontrado = false;
 	int intento = 0;
 	int pos = pFD->h(k);
-	while (!encontrado or !pFE->parar()){    //revisar condicion de parada
-		encontrado = pCeldas[pos]->buscar(k);
-		if (!encontrado){
-			pos = pFE->g(k,intento);
+	bool noExiste = false;
+	while (!encontrado && !pFE->parar() && !noExiste){    //revisar condicion de parada
+		if (pCeldas[pos].buscar(k)){
+			encontrado = true;
+			noExiste = false;
+		} else if (!pCeldas[pos].buscar(k) && !pCeldas[pos].llena()){
+			encontrado = false;
+			noExiste = true;
+		} else {
+			encontrado = false;
+			noExiste = false;
+		}
+		if (!encontrado && !noExiste){
 			intento++;
+			pos = pFE->g(k,intento);
 		}
 	}
 	return encontrado;
@@ -69,7 +95,7 @@ bool Hash<T>::buscar(const T &k){
 
 template <class T>
 bool Hash<T>::llena(){
-	return false;
+	return contador >= numPos*numCeldas;
 }
 
 

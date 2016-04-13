@@ -23,7 +23,7 @@ public:
 	static int tamCelda;
 	Celda ();
 	Celda (int M);
-	bool buscar (T h);
+	bool buscar (T &h);
 	bool insertar (T &clave);
 	bool llena();
 };

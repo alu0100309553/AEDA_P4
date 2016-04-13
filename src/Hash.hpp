@@ -11,6 +11,8 @@
 #include "Celda.hpp"
 #include "FuncDist.cpp"
 #include "FuncExpl.cpp"
+#include "FDRan.cpp"
+#include "FDMod.cpp"
 
 template <class T>
 
@@ -19,10 +21,13 @@ private:
 	Celda <T>  *pCeldas;
 	FuncDist <T> *pFD;
 	FuncExpl <T>  *pFE;
+	int contador;
+	int numPos;
+	int numCeldas;
 public:
 	Hash ();
 	Hash (int N, int M);
-	bool buscar (const T &k);
+	bool buscar (T &k);
 	bool insertar (T &k);
 	bool llena ();
 };
