@@ -14,7 +14,7 @@ public:
 	int N;
 	FuncDist(int N_);
 	virtual ~FuncDist();
-	virtual int h (T clave) const = 0;
+	virtual int h (T clave) = 0;
 	//virtual int h (T clave);
 };
 

@@ -17,7 +17,7 @@ class FDMod : public FuncDist<T> {
 public:
 	FDMod(int N_);
 	virtual ~FDMod();
-	int h(T clave) const;
+	int h(T clave);
 	//void setInitRandon(bool estado);
 };
 

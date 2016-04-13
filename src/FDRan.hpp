@@ -18,8 +18,7 @@ private:
 public:
 	FDRan(int N_);
 	virtual ~FDRan();
-	int h(T clave) const;
-	void setInitRandon(bool estado);
+	int h(T clave);
 };
 
 #endif /* FDRAN_HPP_ */

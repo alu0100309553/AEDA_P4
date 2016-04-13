@@ -12,7 +12,7 @@ FDMod<T>::FDMod(int N_): FuncDist<T>::FuncDist(N_) {
 
 }
 template <class T>
-int FDMod<T>::h(T clave) const{
+int FDMod<T>::h(T clave){
 	return clave % FuncDist<T>::N;
 }
 

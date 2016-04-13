@@ -13,6 +13,10 @@
 #include "FuncExpl.cpp"
 #include "FDRan.cpp"
 #include "FDMod.cpp"
+#include "FELin.cpp"
+#include "FECuad.cpp"
+#include "FEDoble.cpp"
+#include "FERehash.cpp"
 
 template <class T>
 

@@ -15,18 +15,12 @@ FDRan<T>::FDRan(int N_): initrandon(false), FuncDist<T>::FuncDist(N_) {
 
 }
 template <class T>
-int FDRan<T>::h(T clave) const{
+int FDRan<T>::h(T clave){
 	//int rand(void);
-	if (!initrandon){
-		srand(clave);
-	};
+	srand(clave);
 	return rand() % FuncDist<T>::N;
 }
 
-template <class T>
-void FDRan<T>::setInitRandon(bool estado) {
-	initrandon = estado;
-}
 
 template <class T>
 FDRan<T>::~FDRan() {

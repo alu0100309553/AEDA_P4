@@ -12,15 +12,14 @@
 
 template <class T>
 class FuncExpl {
-private:
-	bool para;
-	int N;
 
 public:
+	int N;
+	bool para;
 	FuncDist <T> *pFD;
 	FuncExpl(FuncDist <T> *pFD_, int N);
 	virtual ~FuncExpl();
-	int g (T clave, int intento);
+	virtual int g (T clave, int intento) = 0;
 	bool parar(void);
 };
 

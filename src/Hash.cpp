@@ -37,7 +37,7 @@ numPos(N),
 numCeldas(M)
 {
 	pFD = new FDMod<T>(N);
-	pFE = new FuncExpl<T>(pFD, N);
+	pFE = new FERehash<T>(pFD, N);
 	Celda<T>::tamCelda = M;
 	pCeldas = new Celda<T>[N];
 

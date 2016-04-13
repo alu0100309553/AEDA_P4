@@ -7,6 +7,10 @@ CPP_SRCS += \
 ../src/Celda.cpp \
 ../src/FDMod.cpp \
 ../src/FDRan.cpp \
+../src/FECuad.cpp \
+../src/FEDoble.cpp \
+../src/FELin.cpp \
+../src/FERehash.cpp \
 ../src/FuncDist.cpp \
 ../src/FuncExpl.cpp \
 ../src/Hash.cpp \
@@ -16,6 +20,10 @@ OBJS += \
 ./src/Celda.o \
 ./src/FDMod.o \
 ./src/FDRan.o \
+./src/FECuad.o \
+./src/FEDoble.o \
+./src/FELin.o \
+./src/FERehash.o \
 ./src/FuncDist.o \
 ./src/FuncExpl.o \
 ./src/Hash.o \
@@ -25,6 +33,10 @@ CPP_DEPS += \
 ./src/Celda.d \
 ./src/FDMod.d \
 ./src/FDRan.d \
+./src/FECuad.d \
+./src/FEDoble.d \
+./src/FELin.d \
+./src/FERehash.d \
 ./src/FuncDist.d \
 ./src/FuncExpl.d \
 ./src/Hash.d \

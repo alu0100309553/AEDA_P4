@@ -8,13 +8,13 @@
 #include "FuncExpl.hpp"
 
 template <class T>
-FuncExpl<T>::FuncExpl(FuncDist <T> *pFD_, int N_): pFD(pFD_), para(false), N(N_){
+FuncExpl<T>::FuncExpl(FuncDist <T> *pFD_, int N_): pFD(pFD_), N(N_), para(false){
 }
 
 template <class T>
 FuncExpl<T>::~FuncExpl() {
 }
-
+/**
 template <class T>
 int FuncExpl<T>::g (T clave, int intento){
 	para = false;
@@ -23,9 +23,8 @@ int FuncExpl<T>::g (T clave, int intento){
 	}
 	return (pFD->h(clave)+intento)%N;
 }
-
+**/
 template <class T>
-bool FuncExpl<T>::parar (){
+bool FuncExpl<T>::parar (void){
 	return para;
 }
-
