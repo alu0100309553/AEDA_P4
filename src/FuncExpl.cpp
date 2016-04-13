@@ -7,12 +7,16 @@
 
 #include "FuncExpl.hpp"
 
-FuncExpl::FuncExpl() {
-	// TODO Auto-generated constructor stub
-
+template <class T>
+FuncExpl<T>::FuncExpl(FuncDist <T> *pFD_): pFD(pFD_){
 }
 
-FuncExpl::~FuncExpl() {
-	// TODO Auto-generated destructor stub
+template <class T>
+FuncExpl<T>::~FuncExpl() {
+}
+
+template <class T>
+int FuncExpl<T>::g (T clave, int intento){
+	return pFD->h(clave)+intento;
 }
 

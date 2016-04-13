@@ -15,12 +15,16 @@ template <class T>
 
 class Celda {
 private:
-	vector<T> *pVector;
-	int *claves;
+	T *pVector = 0;
+	//static int tamCelda = 0;
+	bool llenaC = false;
+	//int *claves;
 public:
+	static int tamCelda;
+	Celda ();
 	Celda (int M);
-	bool buscar (T &h, int &pos);
-	bool insertar (const T &clave, const int pos);
+	bool buscar (T h);
+	bool insertar (T &clave);
 	bool llena();
 };
 

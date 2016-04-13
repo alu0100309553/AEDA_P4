@@ -8,10 +8,13 @@
 #ifndef FUNCEXPL_HPP_
 #define FUNCEXPL_HPP_
 
+#include "FuncDist.hpp"
+
 template <class T>
 class FuncExpl {
 public:
-	FuncExpl();
+	FuncDist <T> *pFD;
+	FuncExpl(FuncDist <T> *pFD_);
 	virtual ~FuncExpl();
 	int g (T clave, int intento);
 };

@@ -5,17 +5,17 @@
  *      Author: ruben
  */
 
-#ifndef FUNCDISP_HPP_
-#define FUNCDISP_HPP_
+#ifndef FUNCDIST_HPP_
+#define FUNCDIST_HPP_
 
 template <class T>
-class FuncDisp {
+class FuncDist {
 public:
 	int N;
-	FuncDisp();
-	virtual ~FuncDisp();
+	FuncDist(int N_);
+	virtual ~FuncDist();
 	int h (T clave);
 	//virtual int h (T clave);
 };
 
-#endif /* FUNCDISP_HPP_ */
+#endif /* FUNCDIST_HPP_ */

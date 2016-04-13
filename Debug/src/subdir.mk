@@ -5,21 +5,24 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/Celda.cpp \
-../src/FuncDisp.cpp \
+../src/FuncDist.cpp \
 ../src/FuncExpl.cpp \
-../src/Hash.cpp 
+../src/Hash.cpp \
+../src/main.cpp 
 
 OBJS += \
 ./src/Celda.o \
-./src/FuncDisp.o \
+./src/FuncDist.o \
 ./src/FuncExpl.o \
-./src/Hash.o 
+./src/Hash.o \
+./src/main.o 
 
 CPP_DEPS += \
 ./src/Celda.d \
-./src/FuncDisp.d \
+./src/FuncDist.d \
 ./src/FuncExpl.d \
-./src/Hash.d 
+./src/Hash.d \
+./src/main.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

@@ -6,28 +6,44 @@
  */
 
 
-#include "Hash.cpp"
+#include "Hash.hpp"
+#include "Celda.cpp"
 
 using namespace std;
 
 template <class T>
-Hash<T>::Hash(int N, int M):
-pFD(new FuncDisp(N)),
-pFE(new FuncExpl()),
+Hash<T>::Hash():
+pFD(),
+pFE(),
 pCeldas()
 {
-	for (int i = 0; i<N; i++){
-		pCeldas[i] = new Celda(M);
+	pFD = FuncDist<T>(10);
+	pFE = FuncExpl<T>(pFD);
+	for (int i = 0; i<10; i++){
+		pCeldas[i] = new Celda<T>(10);
 	}
 }
 
 template <class T>
-bool Hash<T>::insertar(const T &k){
+Hash<T>::Hash(int N, int M):
+pFD(),
+pFE(),
+pCeldas()
+{
+	pFD = new FuncDist<T>(N);
+	pFE = new FuncExpl<T>(pFD);
+	Celda<T>::tamCelda = M;
+	pCeldas = new Celda<T>[N];
+
+}
+
+template <class T>
+bool Hash<T>::insertar( T &k){
 	bool insertado = false;
 	int intento = 0;
 	int pos = pFD->h(k);
-	while (!insertado or !llena()){
-		insertado = pCeldas[pos]->insertar(k);
+	while (!insertado && !pCeldas[pos].llena()){
+		insertado = pCeldas[pos].insertar(k);
 		if (!insertado){
 			pos = pFE->g(k,intento);
 			intento++;
@@ -49,6 +65,11 @@ bool Hash<T>::buscar(const T &k){
 		}
 	}
 	return encontrado;
+}
+
+template <class T>
+bool Hash<T>::llena(){
+	return false;
 }
 
 
