@@ -19,11 +19,15 @@ FERehash<T>::~FERehash() {
 
 template <class T>
 int FERehash<T>::g (T clave, int intento){
+	int rand(void); //esto añadido para que funcione con cpp <11
 	int aux;
+	/**
 	FuncExpl<T>::para = false;
+
 	if (intento >= FuncExpl<T>::N){
 		FuncExpl<T>::para = true;
 	}
+	**/
 	srand(clave);
 	for (int i = 0; i <= intento; i++){
 		aux = rand();

@@ -18,10 +18,13 @@ FELin<T>::~FELin() {
 
 template <class T>
 int FELin<T>::g (T clave, int intento){
+	/**
 	FuncExpl<T>::para = false;
+
 	if (intento >= FuncExpl<T>::N){
 		FuncExpl<T>::para = true;
 	}
+	**/
 	return (FuncExpl<T>::pFD->h(clave)+intento)%FuncExpl<T>::N;
 }
 

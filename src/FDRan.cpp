@@ -16,7 +16,7 @@ FDRan<T>::FDRan(int N_): initrandon(false), FuncDist<T>::FuncDist(N_) {
 }
 template <class T>
 int FDRan<T>::h(T clave){
-	//int rand(void);
+	int rand(void);   //esto añadido para que funcione con cpp <11
 	srand(clave);
 	return rand() % FuncDist<T>::N;
 }

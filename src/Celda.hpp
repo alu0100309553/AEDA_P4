@@ -15,9 +15,9 @@ template <class T>
 
 class Celda {
 private:
-	T *pVector = 0;
+	T *pVector;
 	//static int tamCelda = 0;
-	bool llenaC = false;
+	bool llenaC;
 	//int *claves;
 public:
 	static int tamCelda;

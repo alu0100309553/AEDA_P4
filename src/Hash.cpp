@@ -74,7 +74,7 @@ bool Hash<T>::buscar(T &k){
 	int intento = 0;
 	int pos = pFD->h(k);
 	bool noExiste = false;
-	while (!encontrado && !pFE->parar() && !noExiste){    //revisar condicion de parada
+	while (!encontrado && intento <= numPos && !noExiste){    //revisar condicion de parada
 		if (pCeldas[pos].buscar(k)){
 			encontrado = true;
 			noExiste = false;

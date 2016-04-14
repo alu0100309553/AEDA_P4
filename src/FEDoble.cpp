@@ -18,9 +18,12 @@ FEDoble<T>::~FEDoble() {
 
 template <class T>
 int FEDoble<T>::g (T clave, int intento){
+	/**
 	FuncExpl<T>::para = false;
+
 	if (intento >= FuncExpl<T>::N){
 		FuncExpl<T>::para = true;
 	}
+	**/
 	return (FuncExpl<T>::pFD->h(clave)+(intento*FuncExpl<T>::pFD->h(clave)))%FuncExpl<T>::N;
 }

@@ -15,12 +15,12 @@ class FuncExpl {
 
 public:
 	int N;
-	bool para;
+	//bool para;
 	FuncDist <T> *pFD;
 	FuncExpl(FuncDist <T> *pFD_, int N);
 	virtual ~FuncExpl();
 	virtual int g (T clave, int intento) = 0;
-	bool parar(void);
+	//bool parar(void);
 };
 
 #endif /* FUNCEXPL_HPP_ */
