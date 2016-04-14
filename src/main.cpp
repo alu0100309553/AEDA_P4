@@ -1,15 +1,13 @@
 
-
 #include <iostream>
 #include <fstream>
+#include <random>
 #include "Hash.hpp"
 #include "DNI.hpp"
 
 using namespace std;
 
-
-int main(void)
-{
+int main(void) {
 	DNI *vector;
 	int nceldas = 10;
 	int npos = 5;
@@ -17,8 +15,8 @@ int main(void)
 	int fe = 1;
 	double fdeCarga;
 	int nPrueba = 10;
-	cout << "*****DEFINICION DEL PROBLEMA*****"<< endl;
-	cout << "**Número de posiciones de la tabla:"<< endl;
+	cout << "*****DEFINICION DEL PROBLEMA*****" << endl;
+	cout << "**Número de posiciones de la tabla:" << endl;
 	cin >> npos;
 	cout << "**Número de celdas en cada posicion:" << endl;
 	cin >> nceldas;
@@ -40,41 +38,102 @@ int main(void)
 	cin >> nPrueba;
 
 //Generar vector aleatorio de dni
-	int tamVector = 2 * fdeCarga * nceldas * npos;
-	for (int i = 0 ; i < tamVector ; i++){
+	int tamVector = fdeCarga * nceldas * npos;
+	vector = new DNI[2 * tamVector];
 
+	vector = new DNI[tamVector];
+	for (int i = 0; i < 2 * tamVector; i++) {
 
+		int aux = (rand() % 50000000) + 30000000;
+		vector[i] = aux;
+	}
+	Hash<DNI> miHash(npos, nceldas, fd, fe);
+
+	for (int i = 0; i < tamVector; i++) {
+		miHash.insertar(vector[i]);
+	}
+	string fDisp;
+	string fExpl;
+	switch (fe) {
+	case 1:
+		fExpl = "Lineal";
+		break;
+	case 2:
+		fExpl = "Cuadrática";
+		break;
+	case 3:
+		fExpl = "Doble";
+		break;
+	case 4:
+		fExpl = "Re-Hashing";
+		break;
+	default:
+		fExpl = "Lineal";
 	}
 
-	DNI i(30123456);
-	DNI j(30123457);
-
-	Hash<DNI> miHash(5, 5, 1, 1);
-	if (miHash.insertar(j)){
-		cout << "Lo inserto"<< endl;
-	} else{
-		cout << "no lo hizo"<< endl;
+	switch (fd) {
+	case 1:
+		fDisp = "Módulo";
+		break;
+	case 2:
+		fDisp = "Aleatoria";
+		break;
+	default:
+		fDisp = "Módulo";
 	}
 
-	if (miHash.insertar(j)){
-			cout << "Lo inserto de nuevo"<< endl;
-		} else{
-			cout << "no lo hizo"<< endl;
-		}
+	cout << "Celdas   Bloques   Exploracion   Dispersion   Carga   Prueba"
+			<< endl;
+	cout << nceldas << "        " << npos << "       " << fExpl << "         "
+			<< fDisp << "       " << fdeCarga << "      " << nPrueba << endl;
 
-	if (miHash.buscar(j)){
-			cout << "Lo encontró"<< endl;
-		} else{
-			cout << "no lo encontro"<< endl;
-		}
+	//prueba de búsqueda
+	int maximoBus = 0;
+	int minimoBus = 1000000000;
+	int mediaBus = 0;
 
-	if (miHash.buscar(i)){
-				cout << "Lo encontró"<< endl;
-			} else{
-				cout << "no lo encontro"<< endl;
-			}
+	for (int i = 0; i < nPrueba; i++) {
+		int posVector = rand() % tamVector;
+		miHash.resetContador();
+		miHash.buscar(vector[posVector]);
+		int aux = miHash.getContador();
+		if (aux < minimoBus) {
+			minimoBus = aux;
+		};
+		if (aux > maximoBus) {
+			maximoBus = aux;
+		};
+		mediaBus += aux;
+	}
+	float mediaBusF = (float)mediaBus / (float)nPrueba;
 
+	//prueba de insersion
 
+	int maximoInsert = 0;
+	int minimoInsert = 1000000000;
+	int mediaInsert = 0;
+
+	for (int i = 0; i < nPrueba; i++) {
+		int posVector = (rand() % tamVector) + tamVector;
+		miHash.resetContador();
+		miHash.buscar(vector[posVector]);
+		int aux = miHash.getContador();
+		if (aux < minimoInsert) {
+			minimoInsert = aux;
+		};
+		if (aux > maximoInsert) {
+			maximoInsert = aux;
+		};
+		mediaInsert += aux;
+	}
+	float mediaInsertF = (float)mediaInsert / (float)nPrueba;
+
+	cout << "             Número de comparaciones  "<< endl;
+	cout << "           Mínimo    Medio     Máximo "<< endl;
+	cout << "Búsqueda   " << minimoBus << "         " << mediaBusF << "         "
+			<< maximoBus << endl;
+	cout << "Inserción  " << minimoInsert << "         " << mediaInsertF
+			<< "         " << maximoInsert << endl;
 
 	return 0;
 

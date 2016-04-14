@@ -10,27 +10,27 @@
 
 #include "FuncExpl.hpp"
 
-template <class T>
+template<class T>
 
-class FELin : public FuncExpl<T> {
+class FELin: public FuncExpl<T> {
 public:
-	FELin(FuncDist <T> *pFD_, int N);
+	FELin(FuncDist<T> *pFD_, int N);
 	virtual ~FELin();
-	int g (T clave, int intento);
+	int g(T clave, int intento);
 };
 
-template <class T>
-FELin<T>::FELin(FuncDist <T> *pFD_, int N):  FuncExpl<T>::FuncExpl(pFD_, N) {
+template<class T>
+FELin<T>::FELin(FuncDist<T> *pFD_, int N) :
+		FuncExpl<T>::FuncExpl(pFD_, N) {
 
 }
-template <class T>
+template<class T>
 FELin<T>::~FELin() {
-	// TODO Auto-generated destructor stub
 }
 
-template <class T>
-int FELin<T>::g (T clave, int intento){
-	return (FuncExpl<T>::pFD->h(clave)+intento)%FuncExpl<T>::N;
+template<class T>
+int FELin<T>::g(T clave, int intento) {
+	return (FuncExpl<T>::pFD->h(clave) + intento) % FuncExpl<T>::N;
 }
 
 #endif /* FELIN_HPP_ */

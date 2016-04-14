@@ -7,33 +7,29 @@
 
 #include "DNI.hpp"
 
-
-
-bool DNI::operator == (DNI b){
+bool DNI::operator ==(DNI b) {
 	return dniN == b.dniN;
 }
 
-bool DNI::operator == (int b){
+bool DNI::operator ==(int b) {
 	return dniN == b;
 }
 
-int DNI::operator % (int n ){
+int DNI::operator %(int n) {
 	return dniN % n;
 }
-
-DNI::DNI(): dniN(0) {
-
-	// TODO Auto-generated constructor stub
-
+void DNI::operator =(int n) {
+	dniN = n;
 }
 
-DNI::DNI(int N): dniN(N) {
+DNI::DNI() :
+		dniN(0) {
+}
 
-	// TODO Auto-generated constructor stub
-
+DNI::DNI(int N) :
+		dniN(N) {
 }
 
 DNI::~DNI() {
-	// TODO Auto-generated destructor stub
 }
 

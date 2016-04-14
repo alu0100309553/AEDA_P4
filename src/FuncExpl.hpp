@@ -10,24 +10,23 @@
 
 #include "FuncDist.hpp"
 
-template <class T>
+template<class T>
 class FuncExpl {
 
 public:
 	int N;
-	//bool para;
-	FuncDist <T> *pFD;
-	FuncExpl(FuncDist <T> *pFD_, int N);
+	FuncDist<T> *pFD;
+	FuncExpl(FuncDist<T> *pFD_, int N);
 	virtual ~FuncExpl();
-	virtual int g (T clave, int intento) = 0;
-	//bool parar(void);
+	virtual int g(T clave, int intento) = 0;
 };
 
-template <class T>
-FuncExpl<T>::FuncExpl(FuncDist <T> *pFD_, int N_): pFD(pFD_), N(N_){
+template<class T>
+FuncExpl<T>::FuncExpl(FuncDist<T> *pFD_, int N_) :
+		pFD(pFD_), N(N_) {
 }
 
-template <class T>
+template<class T>
 FuncExpl<T>::~FuncExpl() {
 }
 #endif /* FUNCEXPL_HPP_ */

@@ -14,11 +14,12 @@ public:
 	DNI();
 	DNI(int N);
 	virtual ~DNI();
-	operator int(){
+	operator int() {
 		return dniN;
 	}
-	bool operator == (DNI b);
-	bool operator == (int b);
-	int operator % (int n );
+	bool operator ==(DNI b);
+	bool operator ==(int b);
+	int operator %(int n);
+	void operator =(int n);
 };
 #endif /* DNI_HPP_ */

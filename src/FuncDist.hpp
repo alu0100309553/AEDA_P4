@@ -8,21 +8,21 @@
 #ifndef FUNCDIST_HPP_
 #define FUNCDIST_HPP_
 
-template <class T>
+template<class T>
 class FuncDist {
 public:
 	int N;
 	FuncDist(int N_);
 	virtual ~FuncDist();
-	virtual int h (T clave) = 0;
-	//virtual int h (T clave);
+	virtual int h(T clave) = 0;
 };
 
 #include "FuncDist.hpp"
-template <class T>
-FuncDist<T>::FuncDist(int N_): N(N_) {
+template<class T>
+FuncDist<T>::FuncDist(int N_) :
+		N(N_) {
 }
-template <class T>
+template<class T>
 FuncDist<T>::~FuncDist() {
 }
 

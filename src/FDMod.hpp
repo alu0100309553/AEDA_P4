@@ -10,27 +10,25 @@
 
 #include "FuncDist.hpp"
 
-template <class T>
-class FDMod : public FuncDist<T> {
-//private:
-	//bool initrandon;
+template<class T>
+class FDMod: public FuncDist<T> {
 public:
 	FDMod(int N_);
 	virtual ~FDMod();
 	int h(T clave);
-	//void setInitRandon(bool estado);
 };
 
-template <class T>
-FDMod<T>::FDMod(int N_): FuncDist<T>::FuncDist(N_) {
+template<class T>
+FDMod<T>::FDMod(int N_) :
+		FuncDist<T>::FuncDist(N_) {
 
 }
-template <class T>
-int FDMod<T>::h(T clave){
+template<class T>
+int FDMod<T>::h(T clave) {
 	return clave % FuncDist<T>::N;
 }
 
-template <class T>
+template<class T>
 FDMod<T>::~FDMod() {
 }
 
