@@ -31,6 +31,7 @@ private:
 public:
 	Hash ();
 	Hash (int N, int M);
+	Hash (int N, int M, int FD, int FE);
 	bool buscar (T &k);
 	bool insertar (T &k);
 	bool llena ();

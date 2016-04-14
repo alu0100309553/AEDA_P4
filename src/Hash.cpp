@@ -44,6 +44,40 @@ numCeldas(M)
 }
 
 template <class T>
+Hash<T>::Hash(int N, int M, int fd, int fe):
+pFD(),
+pFE(),
+pCeldas(),
+contador(0),
+numPos(N),
+numCeldas(M)
+{
+	switch ( fd ){
+	case 1 : pFD = new FDMod<T>(N);
+	break;
+	case 2 : pFD = new FDRan<T>(N);
+	break;
+	default  : pFD = new FDMod<T>(N);
+	}
+
+	switch ( fe ){
+	case 1 : pFE = new FELin<T>(pFD, N);
+	break;
+	case 2 : pFE = new FECuad<T>(pFD, N);
+	break;
+	case 3 : pFE = new FEDoble<T>(pFD, N);
+	break;
+	case 4 : pFE = new FERehash<T>(pFD, N);
+	break;
+	default  : pFE = new FELin<T>(pFD, N);
+	}
+
+	Celda<T>::tamCelda = M;
+	pCeldas = new Celda<T>[N];
+
+}
+
+template <class T>
 bool Hash<T>::insertar( T &k){
 	bool insertado = false;
 	int intento = 0;
