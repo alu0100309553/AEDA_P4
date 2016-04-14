@@ -1,3 +1,10 @@
+/*
+ * Main.cpp
+ * Autor: Rubén Labrador Páez
+ * EMail: alu0100309553@ull.edu.es
+ * Grado en Ingeniería informática, 2ºCurso, Universidad de La Laguna.
+ * Algoritmos y estructuras de datos avanzadas, Práctica 4, Tabla Hash.
+ */
 
 #include <iostream>
 #include <fstream>
@@ -8,13 +15,26 @@
 using namespace std;
 
 int main(void) {
-	DNI *vector;
-	int nceldas = 10;
-	int npos = 5;
-	int fd = 1;
-	int fe = 1;
-	double fdeCarga;
-	int nPrueba = 10;
+	DNI *vector;      		//Puntero a vector de DNI
+	int nceldas = 5;		//Número de celdas de la tabla
+	int npos = 10;			//Número de posiciones de la tabla
+	int fd = 1;				//Función de dispersión
+	int fe = 1;				//Función de exploración
+	double fdeCarga;		//Factor de carga
+	int nPrueba = 10;		//Número de pruebas
+	int tamVector;			//Tamaño del vector de dni de prueba
+	int maximoBus = 0;		//Variables para el test de búsqueda
+	int minimoBus = 1000000000;
+	int mediaBusAcum = 0;
+	float mediaBusF;
+	int maximoInsert = 0;	//Variables para el test de inserción
+	int minimoInsert = 1000000000;
+	int mediaInsertAcum = 0;
+	float mediaInsertF = 0;
+	string fDisp;
+	string fExpl;
+
+	//Petición de los parámetros del test
 	cout << "*****DEFINICION DEL PROBLEMA*****" << endl;
 	cout << "**Número de posiciones de la tabla:" << endl;
 	cin >> npos;
@@ -37,23 +57,26 @@ int main(void) {
 	cout << "**Indique el numero de pruebas a realizar:" << endl;
 	cin >> nPrueba;
 
-//Generar vector aleatorio de dni
-	int tamVector = fdeCarga * nceldas * npos;
+	//Generar vector aleatorio de DNI para el test indicado
+	tamVector = fdeCarga * nceldas * npos;
 	vector = new DNI[2 * tamVector];
-
 	vector = new DNI[tamVector];
-	for (int i = 0; i < 2 * tamVector; i++) {
 
+	//Asignación de valores de DNI de manera aleatoria
+	for (int i = 0; i < 2 * tamVector; i++) {
 		int aux = (rand() % 50000000) + 30000000;
 		vector[i] = aux;
 	}
+
+	//Creación de la tabla con los parámetros indicados
 	Hash<DNI> miHash(npos, nceldas, fd, fe);
 
+	//Insersión de la mitad de los DNI generados en la tabla
 	for (int i = 0; i < tamVector; i++) {
 		miHash.insertar(vector[i]);
 	}
-	string fDisp;
-	string fExpl;
+
+	//Conversión del tipo de Función de exploración a string
 	switch (fe) {
 	case 1:
 		fExpl = "Lineal";
@@ -71,6 +94,7 @@ int main(void) {
 		fExpl = "Lineal";
 	}
 
+	//Conversión del tipo de Función de dispersión a string
 	switch (fd) {
 	case 1:
 		fDisp = "Módulo";
@@ -82,16 +106,11 @@ int main(void) {
 		fDisp = "Módulo";
 	}
 
-	cout << "Celdas   Bloques   Exploracion   Dispersion   Carga   Prueba"
-			<< endl;
-	cout << nceldas << "        " << npos << "       " << fExpl << "         "
-			<< fDisp << "       " << fdeCarga << "      " << nPrueba << endl;
+	//Presentación de parámetros de la prueba
+	cout << "Celdas   Bloques   Exploracion   Dispersion   Carga   Prueba"<< endl;
+	cout << nceldas << "        " << npos << "       " << fExpl << "       "<< fDisp << "       " << fdeCarga << "      " << nPrueba << endl;
 
-	//prueba de búsqueda
-	int maximoBus = 0;
-	int minimoBus = 1000000000;
-	int mediaBus = 0;
-
+	//Prueba de búsqueda
 	for (int i = 0; i < nPrueba; i++) {
 		int posVector = rand() % tamVector;
 		miHash.resetContador();
@@ -103,16 +122,11 @@ int main(void) {
 		if (aux > maximoBus) {
 			maximoBus = aux;
 		};
-		mediaBus += aux;
+		mediaBusAcum += aux;
 	}
-	float mediaBusF = (float)mediaBus / (float)nPrueba;
+	mediaBusF = (float)mediaBusAcum / (float)nPrueba;
 
-	//prueba de insersion
-
-	int maximoInsert = 0;
-	int minimoInsert = 1000000000;
-	int mediaInsert = 0;
-
+	//Prueba de insersion
 	for (int i = 0; i < nPrueba; i++) {
 		int posVector = (rand() % tamVector) + tamVector;
 		miHash.resetContador();
@@ -124,16 +138,15 @@ int main(void) {
 		if (aux > maximoInsert) {
 			maximoInsert = aux;
 		};
-		mediaInsert += aux;
+		mediaInsertAcum += aux;
 	}
-	float mediaInsertF = (float)mediaInsert / (float)nPrueba;
+	mediaInsertF = (float)mediaInsertAcum / (float)nPrueba;
 
+	//Presentación de resultados de la prueba
 	cout << "             Número de comparaciones  "<< endl;
 	cout << "           Mínimo    Medio     Máximo "<< endl;
-	cout << "Búsqueda   " << minimoBus << "         " << mediaBusF << "         "
-			<< maximoBus << endl;
-	cout << "Inserción  " << minimoInsert << "         " << mediaInsertF
-			<< "         " << maximoInsert << endl;
+	cout << "Búsqueda   " << minimoBus << "         " << mediaBusF << "         "<< maximoBus << endl;
+	cout << "Inserción  " << minimoInsert << "         " << mediaInsertF<< "         " << maximoInsert << endl;
 
 	return 0;
 

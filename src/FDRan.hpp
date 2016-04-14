@@ -1,8 +1,9 @@
 /*
  * FDRan.hpp
- *
- *  Created on: 13 de abr. de 2016
- *      Author: ruben
+ * Autor: Rubén Labrador Páez
+ * EMail: alu0100309553@ull.edu.es
+ * Grado en Ingeniería informática, 2ºCurso, Universidad de La Laguna.
+ * Algoritmos y estructuras de datos avanzadas, Práctica 4, Tabla Hash.
  */
 
 #ifndef FDRAN_HPP_
@@ -11,6 +12,7 @@
 #include "FuncDist.hpp"
 #include <random>
 
+//Función de dispersión por número aleatorio
 template<class T>
 class FDRan: public FuncDist<T> {
 public:
@@ -19,11 +21,14 @@ public:
 	int h(T clave);
 };
 
+//Constructor
 template<class T>
 FDRan<T>::FDRan(int N_) :
 		FuncDist<T>::FuncDist(N_) {
 
 }
+
+//Cálculo del valor de la posición
 template<class T>
 int FDRan<T>::h(T clave) {
 	//int rand(void);   //esto añadido para que funcione con cpp <11
@@ -31,6 +36,7 @@ int FDRan<T>::h(T clave) {
 	return rand() % FuncDist<T>::N;
 }
 
+//Destructor
 template<class T>
 FDRan<T>::~FDRan() {
 }
