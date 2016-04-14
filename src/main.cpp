@@ -1,15 +1,19 @@
+
+
 #include <iostream>
 #include <fstream>
+#include "Hash.cpp"
+#include "DNI.hpp"
 
 using namespace std;
 
-#include "Hash.cpp"
 
 int main(void)
 {
-	int i = 10;
-	int j = 13 ;
-	Hash<int> miHash(5, 5);
+	DNI i(30123456);
+	DNI j(30123458);
+
+	Hash<DNI> miHash(5, 5);
 	if (miHash.insertar(j)){
 		cout << "Lo inserto"<< endl;
 	} else{
@@ -33,6 +37,8 @@ int main(void)
 			} else{
 				cout << "no lo encontro"<< endl;
 			}
+
+
 
 	return 0;
 

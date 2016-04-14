@@ -5,6 +5,7 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../src/Celda.cpp \
+../src/DNI.cpp \
 ../src/FDMod.cpp \
 ../src/FDRan.cpp \
 ../src/FECuad.cpp \
@@ -18,6 +19,7 @@ CPP_SRCS += \
 
 OBJS += \
 ./src/Celda.o \
+./src/DNI.o \
 ./src/FDMod.o \
 ./src/FDRan.o \
 ./src/FECuad.o \
@@ -31,6 +33,7 @@ OBJS += \
 
 CPP_DEPS += \
 ./src/Celda.d \
+./src/DNI.d \
 ./src/FDMod.d \
 ./src/FDRan.d \
 ./src/FECuad.d \
