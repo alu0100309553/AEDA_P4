@@ -10,15 +10,32 @@
 
 
 #include "FuncDist.hpp"
+#include <random>
 
 template <class T>
 class FDRan : public FuncDist<T> {
-private:
-	bool initrandon;
 public:
 	FDRan(int N_);
 	virtual ~FDRan();
 	int h(T clave);
 };
+
+
+
+template <class T>
+FDRan<T>::FDRan(int N_): FuncDist<T>::FuncDist(N_) {
+
+}
+template <class T>
+int FDRan<T>::h(T clave){
+	//int rand(void);   //esto añadido para que funcione con cpp <11
+	srand(clave);
+	return rand() % FuncDist<T>::N;
+}
+
+
+template <class T>
+FDRan<T>::~FDRan() {
+}
 
 #endif /* FDRAN_HPP_ */

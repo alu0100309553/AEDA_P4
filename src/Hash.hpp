@@ -9,14 +9,14 @@
 #define HASH_HPP_
 
 #include "Celda.hpp"
-#include "FuncDist.cpp"
-#include "FuncExpl.cpp"
-#include "FDRan.cpp"
-#include "FDMod.cpp"
-#include "FELin.cpp"
-#include "FECuad.cpp"
-#include "FEDoble.cpp"
-#include "FERehash.cpp"
+#include "FuncDist.hpp"
+#include "FuncExpl.hpp"
+#include "FDRan.hpp"
+#include "FDMod.hpp"
+#include "FELin.hpp"
+#include "FECuad.hpp"
+#include "FEDoble.hpp"
+#include "FERehash.hpp"
 
 template <class T>
 
@@ -36,5 +36,129 @@ public:
 	bool insertar (T &k);
 	bool llena ();
 };
+
+using namespace std;
+
+template <class T>
+Hash<T>::Hash():
+pFD(),
+pFE(),
+pCeldas(),
+contador(0),
+numPos(10),
+numCeldas(10)
+{
+	pFD = FuncDist<T>(10);
+	pFE = FuncExpl<T>(pFD);
+	for (int i = 0; i<10; i++){
+		pCeldas[i] = new Celda<T>(10);
+	}
+}
+
+template <class T>
+Hash<T>::Hash(int N, int M):
+pFD(),
+pFE(),
+pCeldas(),
+contador(0),
+numPos(N),
+numCeldas(M)
+{
+	pFD = new FDMod<T>(N);
+	pFE = new FERehash<T>(pFD, N);
+	Celda<T>::tamCelda = M;
+	pCeldas = new Celda<T>[N];
+
+}
+
+template <class T>
+Hash<T>::Hash(int N, int M, int fd, int fe):
+pFD(),
+pFE(),
+pCeldas(),
+contador(0),
+numPos(N),
+numCeldas(M)
+{
+	switch ( fd ){
+	case 1 : pFD = new FDMod<T>(N);
+	break;
+	case 2 : pFD = new FDRan<T>(N);
+	break;
+	default  : pFD = new FDMod<T>(N);
+	}
+
+	switch ( fe ){
+	case 1 : pFE = new FELin<T>(pFD, N);
+	break;
+	case 2 : pFE = new FECuad<T>(pFD, N);
+	break;
+	case 3 : pFE = new FEDoble<T>(pFD, N);
+	break;
+	case 4 : pFE = new FERehash<T>(pFD, N);
+	break;
+	default  : pFE = new FELin<T>(pFD, N);
+	}
+
+	Celda<T>::tamCelda = M;
+	pCeldas = new Celda<T>[N];
+
+}
+
+template <class T>
+bool Hash<T>::insertar( T &k){
+	bool insertado = false;
+	int intento = 0;
+	int pos = pFD->h(k);
+	if(!buscar(k) && !llena()){
+		while (!insertado && !pCeldas[pos].llena()){
+			insertado = pCeldas[pos].insertar(k);
+			if (!insertado){
+				pos = pFE->g(k,intento);
+				intento++;
+			}
+		}
+		if (insertado){
+			contador++;
+		}
+	}
+	else if(!llena()){
+		insertado = true;   //porque ya existia en la tabla, no se inserta de nuevo
+	}else{
+		insertado = false;
+	}
+	return insertado;
+}
+
+template <class T>
+bool Hash<T>::buscar(T &k){
+	bool encontrado = false;
+	int intento = 0;
+	int pos = pFD->h(k);
+	bool noExiste = false;
+	while (!encontrado && intento <= numPos && !noExiste){    //revisar condicion de parada
+		if (pCeldas[pos].buscar(k)){
+			encontrado = true;
+			noExiste = false;
+		} else if (!pCeldas[pos].buscar(k) && !pCeldas[pos].llena()){
+			encontrado = false;
+			noExiste = true;
+		} else {
+			encontrado = false;
+			noExiste = false;
+		}
+		if (!encontrado && !noExiste){
+			intento++;
+			pos = pFE->g(k,intento);
+		}
+	}
+	return encontrado;
+}
+
+template <class T>
+bool Hash<T>::llena(){
+	return contador >= numPos*numCeldas;
+}
+
 
 #endif /* HASH_HPP_ */

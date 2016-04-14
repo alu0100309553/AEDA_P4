@@ -18,4 +18,12 @@ public:
 	//virtual int h (T clave);
 };
 
+#include "FuncDist.hpp"
+template <class T>
+FuncDist<T>::FuncDist(int N_): N(N_) {
+}
+template <class T>
+FuncDist<T>::~FuncDist() {
+}
+
 #endif /* FUNCDIST_HPP_ */

@@ -23,4 +23,11 @@ public:
 	//bool parar(void);
 };
 
+template <class T>
+FuncExpl<T>::FuncExpl(FuncDist <T> *pFD_, int N_): pFD(pFD_), N(N_){
+}
+
+template <class T>
+FuncExpl<T>::~FuncExpl() {
+}
 #endif /* FUNCEXPL_HPP_ */

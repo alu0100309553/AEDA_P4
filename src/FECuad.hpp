@@ -18,4 +18,19 @@ public:
 	int g (T clave, int intento);
 };
 
+template <class T>
+FECuad<T>::FECuad(FuncDist <T> *pFD_, int N):  FuncExpl<T>::FuncExpl(pFD_, N) {
+
+}
+template <class T>
+FECuad<T>::~FECuad() {
+	// TODO Auto-generated destructor stub
+}
+
+template <class T>
+int FECuad<T>::g (T clave, int intento){
+
+	return (FuncExpl<T>::pFD->h(clave)+(intento*intento))%FuncExpl<T>::N;
+}
+
 #endif /* FECUAD_HPP_ */

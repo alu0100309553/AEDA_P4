@@ -17,34 +17,8 @@ public:
 	operator int(){
 		return dniN;
 	}
+	bool operator == (DNI b);
+	bool operator == (int b);
+	int operator % (int n );
 };
-
-bool operator == (DNI a, DNI b){
-	return a.dniN == b.dniN;
-}
-
-bool operator == (DNI a, int b){
-	return a.dniN == b;
-}
-
-int operator % (DNI a, int n ){
-	return a.dniN % n;
-}
-
-DNI::DNI(): dniN(0) {
-
-	// TODO Auto-generated constructor stub
-
-}
-
-DNI::DNI(int N): dniN(N) {
-
-	// TODO Auto-generated constructor stub
-
-}
-
-DNI::~DNI() {
-	// TODO Auto-generated destructor stub
-}
-
 #endif /* DNI_HPP_ */

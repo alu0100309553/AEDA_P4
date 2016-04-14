@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <fstream>
-#include "Hash.cpp"
+#include "Hash.hpp"
 #include "DNI.hpp"
 
 using namespace std;
