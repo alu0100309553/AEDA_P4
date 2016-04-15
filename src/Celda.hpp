@@ -78,6 +78,9 @@ bool Celda<T>::insertar(T &clave) {
 		if (pVector[i] == 0) {
 			pVector[i] = clave;
 			insertado = true;
+			if (i==tamCelda-1){
+				llenaC = true;
+			}
 		}
 		i++;
 	}
